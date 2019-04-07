@@ -1,7 +1,8 @@
 library(shiny)
 library(ggplot2)
 library(ggrepel)
-load("Datasets.RData")
+con <- url("https://github.com/cobrastatistics/data/raw/master/datasets.RData")
+load(con)
 
 server <- function(input, output) {
   
