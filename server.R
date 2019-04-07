@@ -1,5 +1,4 @@
-#Olympics <- read.csv2("C:/Users/nelso/Desktop/Shiny PCA/raw data/Olympics.csv")
-#Employment <- read.csv2("C:/Users/nelso/Desktop/Shiny PCA/raw data/Employment.csv")
+load("Datasets.RData")
 
 server <- function(input, output) {
   
