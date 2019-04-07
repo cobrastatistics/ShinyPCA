@@ -1,9 +1,9 @@
+library(shiny)
+library(ggplot2)
+library(ggrepel)
 load("Datasets.RData")
 
 server <- function(input, output) {
-  
-  library(ggplot2)
-  library(ggrepel)
   
   
   datasetInput <- reactive({
