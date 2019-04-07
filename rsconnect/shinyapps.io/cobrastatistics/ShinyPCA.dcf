@@ -1,0 +1,12 @@
+name: ShinyPCA
+title: ShinyPCA
+username:
+account: cobrastatistics
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 844802
+bundleId: 1993036
+url: https://cobrastatistics.shinyapps.io/ShinyPCA/
+when: 1554658523.71267
+asMultiple: FALSE
+asStatic: FALSE
