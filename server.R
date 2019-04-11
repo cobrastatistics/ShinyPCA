@@ -17,17 +17,16 @@ server <- function(input, output) {
     
   })
   
-  
+ 
 
   
   
   output$pcaPlot <- renderPlot({
     
-    isolate({
-      dI <- as.data.frame(datasetInput())
-    })
-    
-    
+
+    dI <- as.data.frame(datasetInput())
+
+
     pca <- prcomp(dI[,-1], scale. = T, center = T)
 
     
@@ -40,6 +39,16 @@ server <- function(input, output) {
                     geom_text_repel() +
                     theme_classic( base_size = 14)
       
+    
+  })
+  
+  output$Loadings <- renderTable({
+    
+    dI <- as.data.frame(datasetInput())
+    
+    pca <- prcomp(dI[,-1], scale. = T, center = T)
+    
+    as.data.frame(cbind(names(dI)[-1],round(pca$rotation,2)))
     
   })
   
