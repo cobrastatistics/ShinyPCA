@@ -16,8 +16,10 @@ ui <- fluidPage(
     mainPanel(
       
       tabsetPanel(
-        tabPanel("Plot",plotOutput(outputId = "pcaPlot")),
-        tabPanel("Loadings", DT::dataTableOutput("Loadings"))
+        tabPanel("Plot",plotOutput("pcaPlot"), selectInput(inputId = "Dimension", label = "Choose a dimension:", choices = c("PC1", "PC2", "PC3"), selected = "PC2")),
+        tabPanel("Loadings", DT::dataTableOutput("Loadings")),
+        tabPanel("Scree", plotOutput("Scree")),
+        tabPanel("Data", DT::dataTableOutput("Data"))
       )
       
       

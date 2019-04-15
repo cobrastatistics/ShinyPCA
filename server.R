@@ -20,9 +20,8 @@ server <- function(input, output) {
     
   })
   
- 
 
-  
+
   
   output$pcaPlot <- renderPlot({
     
@@ -31,11 +30,14 @@ server <- function(input, output) {
 
 
     pca <- prcomp(dI[,-1], scale. = T, center = T)
+    
+   
 
     
     ggplot( as.data.frame(pca$x) , 
-            aes(x = PC1 , y = PC2 , 
+            aes(x = PC1 , y = get(input$Dimension), 
                 label = datasetInput()$Country)) +
+                    labs(y = paste0(input$Dimension)) +
                     geom_hline( yintercept = 0, linetype = 2) +
                     geom_vline( xintercept = 0, linetype = 2) +
                     geom_point() +
@@ -55,23 +57,26 @@ server <- function(input, output) {
     
     datatable(pca$rotation)
     
-    # 
-    # loadings <- cbind(Question = rownames(pca$rotation),pca$rotation) %>% 
-    #                                                           as.data.frame() %>%
-    #                                                                   arrange(PC1)
-    # loadings
-    
-    # 
-    # loadings[order(loadings[,"PC1"]),]
-    
-    # loadings <- as.data.frame(cbind(names(dI)[-1],round(pca$rotation,2)))
-    # 
-    # loadings <- loadings[order(loadings$PC1),]
-    # 
-    # loadings
     
   })
   
+  
+  output$Scree <- renderPlot({
+    
+    dI <- as.data.frame(datasetInput())
+    
+    pca <- prcomp(dI[,-1], scale. = T, center = T)
+    
+    screeplot(pca, main = "")
+    
+  })
+  
+  
+  output$Data <- DT::renderDataTable({
+    
+    datasetInput()
+    
+  })
 
   
 }
