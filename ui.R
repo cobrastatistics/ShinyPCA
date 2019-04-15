@@ -17,7 +17,7 @@ ui <- fluidPage(
       
       tabsetPanel(
         tabPanel("Plot",plotOutput(outputId = "pcaPlot")),
-        tabPanel("Loadings", tableOutput("Loadings"))
+        tabPanel("Loadings", DT::dataTableOutput("Loadings"))
       )
       
       

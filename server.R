@@ -1,6 +1,9 @@
 library(shiny)
 library(ggplot2)
 library(ggrepel)
+library(dplyr)
+library(DT)
+
 con <- url("https://github.com/cobrastatistics/data/raw/master/datasets.RData")
 load(con)
 
@@ -42,13 +45,30 @@ server <- function(input, output) {
     
   })
   
-  output$Loadings <- renderTable({
+  
+  
+  output$Loadings <- DT::renderDataTable({
     
     dI <- as.data.frame(datasetInput())
     
     pca <- prcomp(dI[,-1], scale. = T, center = T)
     
-    as.data.frame(cbind(names(dI)[-1],round(pca$rotation,2)))
+    datatable(pca$rotation)
+    
+    # 
+    # loadings <- cbind(Question = rownames(pca$rotation),pca$rotation) %>% 
+    #                                                           as.data.frame() %>%
+    #                                                                   arrange(PC1)
+    # loadings
+    
+    # 
+    # loadings[order(loadings[,"PC1"]),]
+    
+    # loadings <- as.data.frame(cbind(names(dI)[-1],round(pca$rotation,2)))
+    # 
+    # loadings <- loadings[order(loadings$PC1),]
+    # 
+    # loadings
     
   })
   
